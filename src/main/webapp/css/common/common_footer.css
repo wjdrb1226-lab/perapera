@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+
+
+.footerWrap{
+    background:#D6E4F0;
+    padding:40px 0 60px 0;
+}
+
+footer{
+    height:80px;
+    margin:0 auto;
+    background:#D6E4F0;
+    text-align:center;
+    color:334155;
+    font-size:17px;
+    font-family: "Do Hyeon", sans-serif;
+}
+
+.fa-angle-right{
+	margin-left:20px;
+	cursor: pointer;
+}
+.copyright {
+    text-align: center;
+    color: #777;
+    font-size: 17px;
+}
+.footer_logo{
+	color:#3b82f6;
+}
