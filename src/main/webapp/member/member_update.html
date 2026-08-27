@@ -1,0 +1,165 @@
+```jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/member/member_update.css">
+
+<title>PeraPera - 내 정보 수정</title>
+</head>
+
+<body>
+
+<div class="wrap">
+
+    <!-- 헤더 -->
+    <%@ include file="../common_header.jsp" %>
+
+
+    <main>
+
+        <div class="update-box">
+
+            <h1>내 정보 수정</h1>
+            <p>회원님의 정보를 수정할 수 있습니다.</p>
+
+
+            <form name="mem" method="post" action="MemberUpdate">
+
+                <table>
+
+                    <!-- 이름 -->
+                    <tr>
+                        <th>이름</th>
+                        <td>
+                            <input type="text"
+                                   name="t_name"
+                                   value="${member.t_name}">
+                        </td>
+                    </tr>
+
+
+                    <!-- 아이디 -->
+                    <tr>
+                        <th>아이디</th>
+                        <td>
+                            <input type="text"
+                                   name="t_id"
+                                   value="${member.t_id}"
+                                   readonly>
+                        </td>
+                    </tr>
+
+
+                    <!-- 비밀번호 -->
+                    <tr>
+                        <th>비밀번호</th>
+                        <td>
+                            <input type="password"
+                                   name="t_pw"
+                                   placeholder="변경할 비밀번호를 입력하세요.">
+                        </td>
+                    </tr>
+
+
+                    <!-- 비밀번호 확인 -->
+                    <tr>
+                        <th>비밀번호 확인</th>
+                        <td>
+                            <input type="password"
+                                   name="t_pw_check"
+                                   placeholder="비밀번호를 다시 입력하세요.">
+                        </td>
+                    </tr>
+
+
+                    <!-- 이메일 -->
+                    <tr>
+                        <th>이메일</th>
+                        <td>
+                            <input type="email"
+                                   name="t_email"
+                                   value="${member.t_email}">
+                        </td>
+                    </tr>
+
+
+                    <!-- 닉네임 -->
+                    <tr>
+                        <th>닉네임</th>
+                        <td>
+                            <input type="text"
+                                   name="t_nick"
+                                   value="${member.t_nick}">
+                        </td>
+                    </tr>
+
+
+                    <!-- 일본어 수준 -->
+                    <tr>
+                        <th>일본어 수준</th>
+                        <td>
+
+                            <select name="t_level">
+
+                                <option value="초급"
+                                    ${member.t_level == '초급' ? 'selected' : ''}>
+                                    초급
+                                </option>
+
+                                <option value="중급"
+                                    ${member.t_level == '중급' ? 'selected' : ''}>
+                                    중급
+                                </option>
+
+                                <option value="고급"
+                                    ${member.t_level == '고급' ? 'selected' : ''}>
+                                    고급
+                                </option>
+
+                            </select>
+
+                        </td>
+                    </tr>
+
+                </table>
+
+
+                <div class="button-area">
+
+                    <button type="submit" class="update-btn">
+                        수정하기
+                    </button>
+
+                    <button type="button"
+                            class="cancel-btn"
+                            onclick="location.href='../index.jsp'">
+                        취소
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+    <!-- 터 -->
+    <%@ include file="../common_footer.jsp" %>
+
+</div>
+
+</body>
+</html>
+```

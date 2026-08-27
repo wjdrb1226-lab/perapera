@@ -1,24 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Track27 임정규 notice_write</title>
-<link rel="stylesheet" href="../css/notice/notice_view.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-</head>
-<body>
-
 <%@include file="../common_header.jsp" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/notice/notice_view.css">
 
 
-<!--  -->
+
+<script>
+	function goUpdateForm(){
+		noti.t_gubun.value="updateForm";
+		noti.method="post";
+		noti.action="Notice";
+		noti.submit();
+		
+	}
+	
+	function goDelete(){
+		if(confirm("삭제 하시겠습니까?")){
+			noti.t_gubun.value="delete";
+			noti.method="post";
+			noti.action="Notice";
+			noti.submit();
+	   }
+	}
+
+</script>
+
+
+	<form name="noti">
+         <input type="hidden" name="t_gubun">
+         <input type="hidden" name="t_no" value="${dto.getNo()}">
+         <input type="hidden" name="t_ori_attach" value="${dto.getAttach()}">
+    </form>
 
 
 <div class="wrap">
@@ -31,24 +43,24 @@
 
             <tr>
                 <th>제목</th>
-                <td colspan="5">📢 PeraPera 서비스 업데이트 안내</td>
+                <td colspan="5">📢 ${dto.getTitle()}</td>
             </tr>
 
             <tr>
                 <th>작성자</th>
-                <td>관리자</td>
+                <td>${dto.getReg_id()}</td>
 
                 <th>작성일</th>
-                <td>2026-08-04</td>
+                <td>${dto.getReg_date()}</td>
 
                 <th>조회수</th>
-                <td>248</td>
+                <td>${dto.getHit()}</td>
             </tr>
 
             <tr>
                 <th>첨부파일</th>
                 <td colspan="5">
-                    <a href="#">PeraPera_Update.pdf</a>
+                    <a href="FileDownServlet?t_fileDir=notice&t_fileName=${dto.getAttach()}">${dto.getAttach()}</a>
                 </td>
             </tr>
 
@@ -57,9 +69,11 @@
 
                 <td colspan="5">
 
-                    <div class="content_box">
+                    <div class="content_box"> ${dto.getContent()}
 
-						안녕하세요.
+
+
+						<!-- 안녕하세요.
 						
 						PeraPera를 이용해주셔서 감사합니다.
 						
@@ -73,7 +87,7 @@
 						앞으로도 더 좋은 서비스를 제공하도록 노력하겠습니다.
 						
 						감사합니다.
-
+-->
                     </div>
 
                 </td>
@@ -82,12 +96,12 @@
         </table>
 
         <div class="btn_box">
-
-            <input type="button" value="목록" class="list_btn" onclick="location.href='notice_list.jsp'">
-
-            <input type="button" value="수정" class="edit_btn" onclick="location.href='notice_update.jsp'">
-
-            <input type="button" value="삭제" class="delete_btn">
+            <input type="button" value="목록" class="list_btn" onclick="location.href='Notice'">
+        
+        <c:if  test="${sessionLevel eq 'top'}">
+            <input type="button" value="수정" class="edit_btn" onclick="goUpdateForm()">
+            <input type="button" value="삭제" class="delete_btn" onclick="goDelete()">
+		</c:if>
 
         </div>
 

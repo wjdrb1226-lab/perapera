@@ -1,80 +1,89 @@
 @charset "UTF-8";
 
-
 header{
-    height:90px;
-    width:1550px;
-	margin: 40px auto 30px auto;
-    background:#fff;
-    border-radius:20px;
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
-    padding:0 35px;
+    height: 90px;
+    width: 1550px;
+    margin: 40px auto 30px auto;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    padding: 0 35px;
+    box-sizing: border-box;
+    font-family:"Do Hyeon", sans-serif;
+    font-weight:400;
+    font-style:normal;
 }
+
+
+/* 로고 */
 .logo{
-	float:left;
-    line-height:90px;
-	white-space: nowrap;
-	font-size:30px;
-	color : #3b82f6;
-	
+    float: left;
+    line-height: 90px;
+    white-space: nowrap;
+    font-size: 30px;
+    color: #3b82f6;
 }
 
 .logo a{
-	text-decoration: none;
-	color : #3b82f6;
-	
+    text-decoration: none;
+    color: #3b82f6;
 }
 
 
+/* 메뉴 */
 .headerList{
-	float:left;
-	line-height:90px;
-	margin-left: 80px;
-	white-space: nowrap;
-	
-	}
+    float:left;
+    line-height:90px;
+    margin:0;
+    margin-left:80px;
+    padding:0;
+    white-space:nowrap;
+}
 
 .headerList li{
-	display:inline-block;
-	color:inherit;
-	background:#fff;
-    color:white;
-	font-size:25px;
-	
-	
+    display:inline-block;
+    margin:0;
+    padding:0;
+    font-size:25px
 }
 
-.headerList li a {
-    display: block;
-    padding: 0px 50px;
-    color: black;
-    text-decoration: none;
-    border-radius: 10px;
-    transition: 0.3s;
+.headerList li a{
+    display:block;
+    padding:0px 50px;
+    color:black;
+    text-decoration:none;
+    border-radius:10px;
+    transition:0.3s;
 }
 
-.headerList li a:hover {
+.headerList li a:hover{
     background-color: #3b82f6;
     color: white;
 }
 
 
-.headerJoin {
-	float:right;
-	line-height:90px;
-	color:black;
-    font-size:20px;
-	white-space: nowrap;
-}
-.headerJoin a{
-	color:black;
-}
-.headerJoin a:hover{
-	color:#3b82f6;
+/* 로그인 / 회원가입 */
+.headerJoin{
+    float:right;
+    line-height:90px;
+    color:black;
+    font-size:18px;
+    white-space:nowrap;
 }
 
+.headerJoin a{
+    color:black;
+    text-decoration:none;
+}
+
+.headerJoin a:hover{
+    color: #3b82f6;
+}
+
+
+/* float 해제 */
 header::after{
-    content:"";
-    display:block;
-    clear:both;
+    content: "";
+    display: block;
+    clear: both;
 }

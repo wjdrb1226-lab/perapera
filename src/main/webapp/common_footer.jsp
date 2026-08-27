@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="../css/common/common_footer.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common/common_footer.css">
     
 <footer>
 	<div class="footerWrap">

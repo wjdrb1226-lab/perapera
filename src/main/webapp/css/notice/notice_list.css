@@ -267,9 +267,104 @@ tbody td{
 }
 
 
+/* 검색 */
+
+.notice_lis form{
+    margin-bottom:25px;
+}
+
+.notice_lis form p{
+    text-align:right;
+}
+
+.notice_lis select{
+    width:110px;
+    height:42px;
+    padding:0 12px;
+    border:1px solid #d9e2ec;
+    border-radius:8px;
+    background:#fff;
+    color:#555;
+    font-family:"Pretendard", sans-serif;
+    font-size:15px;
+    outline:none;
+    cursor:pointer;
+}
+
+.notice_lis select:focus{
+    border-color:#3b82f6;
+}
+
+
+.notice_lis input[type="text"]{
+    width:280px;
+    height:42px;
+    padding:0 15px;
+    margin-left:5px;
+    border:1px solid #d9e2ec;
+    border-radius:8px;
+    background:#fff;
+    color:#333;
+    font-family:"Pretendard", sans-serif;
+    font-size:15px;
+    outline:none;
+    transition:.25s;
+}
+
+.notice_lis input[type="text"]:focus{
+    border-color:#3b82f6;
+    box-shadow:0 0 0 3px rgba(59, 130, 246, .1);
+}
+
+.notice_lis input[type="text"]::placeholder{
+    color:#aaa;
+}
+
+
+/* 검색 버튼 */
+
+.notice_lis button{
+    height:42px;
+    padding:0 18px;
+    margin-left:5px;
+    border:none;
+    border-radius:8px;
+    background:#3b82f6;
+    color:white;
+    font-family:"Pretendard", sans-serif;
+    font-size:15px;
+    font-weight:500;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.notice_lis button:hover{
+    background:#2563eb;
+    box-shadow:0 4px 10px rgba(37, 99, 235, .2);
+}
+
+.notice_lis button:active{
+    transform:scale(.97);
+}
+
+.notice_lis button i{
+    margin-right:5px;
+}
 
 
 
+.important_badge{
+    display: inline-block;
+    margin-right:8px;
+    padding:4px 8px;
+    border-radius:6px;
+    background:#fee2e2;
+    color:#dc2626;
+    font-family:"Pretendard", sans-serif;
+    font-size:13px;
+    font-weight:600;
+    vertical-align:middle;
+}
 
 
 

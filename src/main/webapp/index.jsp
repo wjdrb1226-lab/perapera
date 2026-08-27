@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -9,38 +11,68 @@
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Track27 임정규</title>
-<link rel="stylesheet" href="css/main/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main/main.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+<script type="text/javascript">
+	function goPage(gubun){
+		work.t_gubun.value = gubun;
+		work.method="post";
+		work.action="Member";
+		work.submit();
+	}
+	function goNotice(gubun){
+		work.t_gubun.value = gubun;
+		work.method="post";
+		work.action="Notice";
+		work.submit();
+	}
+	
+</script>
 
 
 </head>
 <body>
+<form name="work">
+	<input type="hidden" name="t_gubun">
+</form>
+
 
 <div class="wrap">
 
 <!--  -->
 <header>
+
 	<div class="logo">
 		<i class="fa-solid fa-book-open"></i>
-		<a href="index.jsp">PeraPera</a>
+		<a href="Index">PeraPera</a>
 	</div>
-	
-	
-	
-	
+
 	<div class="headerMenu">
 		<ul class="headerList">
 			<li><a href="">단어장</a></li>
-		    <li><a href="">암기</a></li>
-		    <li><a href="notice/notice_list.jsp">공지사항</a></li>
-		    <li><a href="">커뮤니티</a></li>
-		    <li><a href="">마이페이지</a></li>
+			<li><a href="">암기</a></li>
+			<li><a href="javascript:goNotice('notice')">공지사항</a></li>
+			<li><a href="">커뮤니티</a></li>
+			<li><a href="javascript:goPage('myinfo')">마이페이지</a></li>
 		</ul>
 	</div>
-	
+
 	<div class="headerJoin">
-		<a href="member/member_login.jsp">로그인</a> / 
-		<a href="member/member_join.jsp">회원가입</a>
+
+		<c:if test="${not empty sessionName}">
+			<a>${sessionName}님.</a>
+			<a href="javascript:goPage('myinfo')">Myinfo</a>
+			<a href="javascript:goPage('logout')">Logout</a>
+		</c:if>
+
+		<c:if test="${empty sessionName}">
+			<a href="javascript:goPage('login')">로그인</a>
+			<span> / </span>
+			<a href="javascript:goPage('join')">회원가입</a>
+		</c:if>
+
 	</div>
 
 </header>
@@ -92,7 +124,7 @@
 					<p class="fast_2_1">암기</p>
 					<p class="fast_2_2">단어 암기 학습</p>
 				</div>
-				<a href="notice/notice_list.jsp" class="fast_3">
+				<a href="javascript:goNotice('notice')" class="fast_3">
 					<i class="fa-solid fa-bell"></i>
 					<p class="fast_3_1">공지사항</p>
 					<p class="fast_3_2">새로운 소식/이벤트</p>
@@ -123,25 +155,80 @@
 	
 	<!-- 로그인 -->
 		<div class="login">
-			<div>
-				<i class="fa-solid fa-circle-user"></i>
-				<p class="login_guide">로그인이 필요합니다.</p>
-				<div class="login_ment">
-					<p>오늘도 한 걸음 더</p>
-					<p>일본어에 가까워지세요.</p>
-					<p>로그인하고 나만의 단어장과 학습 기록을 이어서 시작해보세요!</p>
-				</div>
-				
-				<div class="login_box">
-					<div class="login_box_1">
-						<a href="member/member_login.jsp">로그인</a>
-					</div>
-					<div class="login_box_2">
-						<a href="member/member_join.jsp">회원가입</a>
-					</div>
-				</div>
+
+	<!-- 로그인 상태 -->
+	<c:if test="${not empty sessionName}">
+
+		<div class="login_member">
+
+			<i class="fa-solid fa-circle-user"></i>
+
+			<p class="login_welcome">
+				${sessionName}님, 환영합니다!
+			</p>
+
+			<div class="login_ment">
+				<p>오늘도 PeraPera와 함께</p>
+				<p>일본어 공부를 시작해보세요.</p>
 			</div>
+
+			<div class="login_member_box">
+
+				<div class="login_member_box_1">
+					<a href="javascript:goPage('myinfo')">
+						<i class="fa-solid fa-user"></i>
+						마이페이지
+					</a>
+				</div>
+
+				<div class="login_member_box_2">
+					<a href="javascript:goPage('logout')">
+						<i class="fa-solid fa-right-from-bracket"></i>
+						로그아웃
+					</a>
+				</div>
+
+			</div>
+
 		</div>
+
+	</c:if>
+
+
+	<!-- 로그아웃 상태 -->
+	<c:if test="${empty sessionName}">
+
+		<div>
+
+			<i class="fa-solid fa-circle-user"></i>
+
+			<p class="login_guide">
+				로그인이 필요합니다.
+			</p>
+
+			<div class="login_ment">
+				<p>오늘도 한 걸음 더</p>
+				<p>일본어에 가까워지세요.</p>
+				<p>로그인하고 나만의 단어장과 학습 기록을 이어서 시작해보세요!</p>
+			</div>
+
+			<div class="login_box">
+
+				<div class="login_box_1">
+					<a href="javascript:goPage('login')">로그인</a>
+				</div>
+
+				<div class="login_box_2">
+					<a href="javascript:goPage('join')">회원가입</a>
+				</div>
+
+			</div>
+
+		</div>
+
+	</c:if>
+
+</div>
 	
 	
 	<!-- 서비스 -->
@@ -175,8 +262,11 @@
 	<div class="notice">
 		<i class="fa-solid fa-bullhorn"></i>
 		<p class="notice_title">공지사항</p>
-		<p class="notice_content">새로운 이벤트가 진행 중입니다! 지금 바로 참여하세요.</p>
-		<p class="notice_date">2026.07.01 <i class="fa-solid fa-angle-right"></i></p>
+		<p class="notice_content" onclick="location.href='Notice'">
+			${nDto.getTitle()}
+		<!-- 새로운 이벤트가 진행 중입니다! 지금 바로 참여하세요.-->
+		</p>
+		<p class="notice_date">${nDto.getReg_date()} <i class="fa-solid fa-angle-right" onclick="location.href='Notice'"></i></p>
 	</div>
 	
 	<div class="copyright">

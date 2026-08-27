@@ -1,0 +1,371 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+import common.CommonUtil;
+import common.DBConnection;
+import dto.NoticeDto;
+
+public class NoticeDao {
+	Connection con = null;
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	
+	
+	
+	
+	
+	public int getTotalCount(String select, String search) {
+      int count=0;
+      String sql="select count(*) as count from my_임정규_notice where "+select+" like '%"+search+"%'";
+      try {
+         con=DBConnection.getConnection();
+         ps=con.prepareStatement(sql);
+         rs=ps.executeQuery();
+         if(rs.next()) {
+            count=rs.getInt("count");
+         }
+      }catch(Exception e) {
+         e.printStackTrace();
+         System.out.println("getTotalCount: "+sql);
+      }finally {
+         DBConnection.closeDB(con, ps, rs);
+      }      
+      return count;
+   }
+
+
+
+	
+	
+	public List<NoticeDto> getNoticeList(String select, String search, int start, int end) {
+
+	    List<NoticeDto> dtos = new ArrayList<>();
+
+	    String sql =
+	          "select * "
+	        + "from ( "
+	        + "    select rownum as rnum, tbl.* "
+	        + "    from ( "
+	        + "        select "
+	        + "            n.no, "
+	        + "            n.title, "
+	        + "            n.attach, "
+	        + "            n.important, "
+	        + "            m.name, "
+	        + "            to_char(n.reg_date,'yyyy-MM-dd') as reg_date, "
+	        + "            n.hit "
+	        + "        from my_임정규_notice n, "
+	        + "             my_임정규_member m "
+	        + "        where n.reg_id = m.id "
+	        + "		   and n."+select+" like '%"+search+"%'\r\n"
+	        + "        order by case when n.important = 'Y' then 0 else 1 end, n.no desc "
+	        + "    ) tbl "
+	        + ") "
+	        + "where rnum >= " + start
+	        + "and rnum <= " + end;
+
+	    try {
+
+	        con = DBConnection.getConnection();
+	        ps = con.prepareStatement(sql);
+	        rs = ps.executeQuery();
+
+	        while(rs.next()) {
+
+	            String no = rs.getString("no");
+	            String title = rs.getString("title");
+	            String attach = rs.getString("attach");
+	            String important = rs.getString("important");
+	            String reg_name = rs.getString("name");
+	            String reg_date = rs.getString("reg_date");
+	            int hit = rs.getInt("hit");
+
+	            NoticeDto dto = new NoticeDto(no,title,"",important,attach,hit,reg_name,reg_date);
+
+	            dtos.add(dto);
+	        }
+
+	    } catch(Exception e) {
+
+	        System.out.println("getNoticeList() 오류:" + sql);
+	        e.printStackTrace();
+
+	    } finally {
+
+	        DBConnection.closeDB(con, ps, rs);
+	    }
+
+	    return dtos;
+	}
+	
+	
+
+
+//	public List<NoticeDto> getNoticeList(String select, String search, int start, int end) {
+//		List<NoticeDto> dtos = new ArrayList<>();
+//		String sql = "select *\r\n"
+//				+ "from(\r\n"
+//				+ "    select rownum as rnum, tbl.*\r\n"
+//				+ "    from(\r\n"
+//				+ "        select\r\n"
+//				+ "            n.no,\r\n"
+//				+ "            n.title,\r\n"
+//				+ "            n.attach,\r\n"
+//				+ "            m.name,\r\n"
+//				+ "            to_char(n.reg_date,'yyyy-MM-dd') as reg_date,n.hit\r\n"
+//				+ "        from my_임정규_notice n,\r\n"
+//				+ "             my_임정규_member m\r\n"
+//				+ "        where n.reg_id = m.id\r\n"
+//				+ "        and n."+select+" like '"+search+"'\r\n"
+//				+ "        order by n.no desc\r\n"
+//				+ "    ) tbl\r\n"
+//				+ ")\r\n"
+//				+ "    where rnum >= "+start+"\r\n"
+//				+ "    and rnum <= "+end;
+//		try {
+//			con = DBConnection.getConnection();
+//			ps  = con.prepareStatement(sql);
+//			rs  = ps.executeQuery();	
+//			while(rs.next()){
+//				String no = rs.getString("no"); 
+//				String title = rs.getString("title"); 
+//				String attach = rs.getString("attach"); 
+//				String name = rs.getString("name"); 
+//				String reg_date = rs.getString("reg_date"); 
+//				int hit = rs.getInt("hit");
+//				NoticeDto dto = new NoticeDto(no, title, "", "", attach, hit,name,reg_date);
+//				
+//				dtos.add(dto);
+//				
+//			}
+//		}catch(Exception e) {
+//			System.out.println("getNoticeList() 오류:"+sql);
+//			e.printStackTrace();
+//		}finally {
+//			DBConnection.closeDB(con, ps, rs);
+//		}
+//		
+//		
+//		
+//		return dtos;
+//	}
+
+
+
+
+
+	public String getNoticeNo() {
+      String no="";
+      String sql="select nvl(max(no),'N000') as no from my_임정규_notice";
+      try {
+         con=DBConnection.getConnection();
+         ps=con.prepareStatement(sql);
+         rs=ps.executeQuery();
+         if(rs.next()) {
+            no=rs.getString("no");
+            no=no.substring(1);
+            int newNo=Integer.parseInt(no)+1;
+            DecimalFormat df=new DecimalFormat("N000");
+            no=df.format(newNo);
+         }
+      }catch(Exception e) {
+         e.printStackTrace();
+         System.out.println("getNoticeNo: "+sql);
+      }finally {
+         DBConnection.closeDB(con, ps, rs);
+      }
+      return no;
+   }
+
+
+
+
+
+	public int noticeSave(NoticeDto dto) {
+      int result=0;
+      String sql="insert into my_임정규_notice "
+      		+ "(no,title,content,important,attach,reg_id,reg_date) "
+      		+ "values "
+      		+ "('"+dto.getNo()+"','"+dto.getTitle()+"','"+dto.getContent()+"','"+dto.getImportant()+"','"+dto.getAttach()+"','"+dto.getReg_id()+"',to_date('"+dto.getReg_date()+"','yyyy-MM-dd hh24:mi:ss'))";
+      try {
+         con=DBConnection.getConnection();
+         ps=con.prepareStatement(sql);
+         result=ps.executeUpdate();
+      }catch(Exception e) {
+         e.printStackTrace();
+         System.out.println("noticeSave: "+sql);
+      }finally {
+         DBConnection.closeDB(con, ps, rs);
+      }
+      return result;
+   }
+
+
+
+
+
+	//조회수 증가
+	public int setHitCount(String no) {
+		int result = 0;
+		String sql = "update my_임정규_notice\r\n"
+	            + "set hit = hit + 1\r\n"
+	            + "where no = '"+no+"'";;
+		
+	            try {
+	                con = DBConnection.getConnection();
+	                ps = con.prepareStatement(sql);
+	                result = ps.executeUpdate();
+	             }catch(Exception e){
+	                e.printStackTrace();
+	                System.out.println("setHitCount 오류:"+sql);
+	             }finally {
+	                DBConnection.closeDB(con, ps, rs);
+	             }
+		
+		
+
+		return result;
+	}
+
+
+
+
+
+	//상세조회
+	public NoticeDto noticeView(String no) {
+		NoticeDto dto = null;
+		String sql = "select no, title, content, important, attach, reg_id,to_char(reg_date,'yyyy-MM-dd') as reg_date,hit\r\n"
+				+ "from my_임정규_notice\r\n"
+				+ "where no = '"+no+"'";
+		try {
+	         con=DBConnection.getConnection();
+	         ps=con.prepareStatement(sql);
+	         rs=ps.executeQuery();
+	         if(rs.next()){
+	             String title = rs.getString(CommonUtil.getCheckNull("title"));
+	             //CommonUtil.getDoubleQuot(title); //큰 따옴표 html특수기호 문자표로 나오게
+	             String content = rs.getString("content");
+	             String important = rs.getString("important");
+	             String attach = rs.getString("attach");
+	             String reg_id = rs.getString("reg_id");
+	             String reg_date = rs.getString("reg_date");
+	            // String update_date = rs.getString("update_date");
+	             int hit = rs.getInt("hit");
+	        	 
+	             dto = new NoticeDto(no, title, content, important, attach, hit, reg_id, reg_date);
+	        	 
+	         }
+	         
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	         System.out.println("noticeView 오류 : "+sql);
+	      }finally {
+	         DBConnection.closeDB(con, ps, rs);
+	      }
+		
+		
+		return dto;
+	}
+
+
+
+
+	//수정
+	public int noticeUpdate(NoticeDto dto) {
+		int result = 0;
+		String sql = "update my_임정규_notice\r\n"
+				+ "set title='"+dto.getTitle()+"',\r\n"
+				+ "    content='"+dto.getContent()+"',\r\n"
+				+ "    important = '"+dto.getImportant()+"',\r\n"
+				+ "    attach='"+dto.getAttach()+"'\r\n"
+				+ "    where no = '"+dto.getNo()+"'";
+		
+		 try {
+                con = DBConnection.getConnection();
+                ps = con.prepareStatement(sql);
+                result = ps.executeUpdate();
+             }catch(Exception e){
+                e.printStackTrace();
+                System.out.println("noticeUpdate 오류:"+sql);
+             }finally {
+                DBConnection.closeDB(con, ps, rs);
+             }
+		
+		
+		return result;
+	}
+
+
+
+
+
+	//게시글 삭제
+	public int noticeDelete(String no) {
+		int result = 0;
+		String sql = "delete from my_임정규_notice\r\n"
+				+ "			where no = '"+no+"'";
+		
+		try {
+            con = DBConnection.getConnection();
+            ps = con.prepareStatement(sql);
+            result = ps.executeUpdate();
+         }catch(Exception e){
+            e.printStackTrace();
+            System.out.println("noticeDelete 오류:"+sql);
+         }finally {
+            DBConnection.closeDB(con, ps, rs);
+         }
+		
+		return result;
+	}
+
+
+
+
+
+	public NoticeDto indexNotice() {
+		NoticeDto dto = new NoticeDto();
+		String sql = "select *\r\n"
+				+ "from (\r\n"
+				+ "    select no, title, to_char(reg_date,'yyyy-MM-dd hh:mi:ss') as reg_date\r\n"
+				+ "    from my_임정규_notice\r\n"
+				+ "    order by reg_date desc\r\n"
+				+ ")\r\n"
+				+ "where rownum = 1";
+		
+		try {
+	         con=DBConnection.getConnection();
+	         ps=con.prepareStatement(sql);
+	         rs=ps.executeQuery();
+	         if(rs.next()){
+	             String no = rs.getString("no");
+	             String title = rs.getString("title");
+	             String reg_date = rs.getString("reg_date");
+	        	 
+	             dto = new NoticeDto(no, title, reg_date);
+	             
+	             
+	         }
+	         
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	         System.out.println("indexNotice 오류 : "+sql);
+	      }finally {
+	         DBConnection.closeDB(con, ps, rs);
+	      }
+		
+		
+		
+		
+		
+		return dto;
+	}
+			
+			
+}

@@ -1,9 +1,9 @@
 package common;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class CommonUtil {
 
@@ -21,10 +21,10 @@ public class CommonUtil {
 	}
 	
 	//공지사항 첨부파일 경로
-	public static String getNoticeDir(){
-		String dir = "C:/track27_ijg/java_jsp_project/web_jsl/src/main/webapp/attach/notice/";
-		return dir;
-	}
+	public static String getNoticeDir(HttpServletRequest request){
+	    String dir = request.getSession().getServletContext().getRealPath("/")+"attach/notice/";
+	    return dir;
+	  }
 	public static String getPdsDir(){
 		String dir = "C:/track27_ijg/java_jsp_project/web_jsl/src/main/webapp/attach/pds/";
 		return dir;
@@ -78,7 +78,7 @@ public class CommonUtil {
 		//첫번째 페이지 인덱스 화면이 아닌경우
 		if(current_page > pagenumber){
 			curpage = startpage -1;  //시작페이지 번호보다 1적은 페이지로 이동
-			strList = strList +"<a href=javascript:goPage('"+curpage+"') ><i class='fa fa-angle-double-left'></i></a>";
+			strList = strList +"<a href=javascript:goPageList('"+curpage+"') ><i class='fa fa-angle-double-left'></i></a>";
 		}
 						
 		//시작페이지 번호부터 마지막 페이지 번호까지 화면에 표시
@@ -87,14 +87,14 @@ public class CommonUtil {
 			if(curpage == current_page){
 				strList = strList +"<a class='active'>"+current_page+"</a>";
 			} else {
-				strList = strList +"<a href=javascript:goPage('"+curpage+"')>"+curpage+"</a>";
+				strList = strList +"<a href=javascript:goPageList('"+curpage+"')>"+curpage+"</a>";
 			}
 			curpage++;
 		}
 		//뒤에 페이지가 더 있는 경우
 		if(total_page > endpage){
 			curpage = endpage+1;
-			strList = strList + "<a href=javascript:goPage('"+curpage+"') ><i class='fa fa-angle-double-right'></i></a>";
+			strList = strList + "<a href=javascript:goPageList('"+curpage+"') ><i class='fa fa-angle-double-right'></i></a>";
 		}
 		return strList;
 	}			

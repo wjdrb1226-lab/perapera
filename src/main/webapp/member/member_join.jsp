@@ -2,15 +2,16 @@
     pageEncoding="UTF-8"%>
 
 <title>Track27 임정규 join</title>
-<link rel="stylesheet" href="../css/member/member_join.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/member/member_join.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-<%@include file="../common_header.jsp" %>
+<%@include file="/common_header.jsp" %>
 </head>
 <body>
 
 
 
 <script>
+
 	function goSave(){
 		if(checkEmpty(mem.t_name,"성명 입력!")) return;
 		if(checkEmpty(mem.t_id,"ID 입력!")) return;
@@ -38,7 +39,7 @@
 		mem.t_gubun.value ="memberSave";
 		mem.method="post";
 		mem.action="Member";
-		//mem.submit();
+		mem.submit();
 	}
 	
 	function checkId(){
@@ -46,7 +47,7 @@
 		var id = mem.t_id.value;
 		$.ajax({
 			type :"POST",
-			url : "../MemberCheckId",
+			url : "MemberCheckId",
 			data: "t_id="+id,
 			async:false,
 			dataType : "text",
@@ -143,7 +144,7 @@
 	                <button class="joinBtn" onclick="goSave()">
 	                    회원가입
 	                </button>
-				 <a href="../index.jsp" class="homeBtn">메인으로</a>
+				 <a href="Member" class="homeBtn">메인으로</a>
 
             </div>
 
@@ -154,7 +155,7 @@
 	
 	            이미 회원이신가요?
 	
-	            <a href="member_login.html">
+	            <a href="javascript:goPage('login')">
 	                로그인
 	            </a>
 	

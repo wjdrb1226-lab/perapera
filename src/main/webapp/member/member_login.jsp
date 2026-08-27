@@ -1,23 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-<title>Track 27 임정규 login</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../css/member/member_login.css">
-<link rel="stylesheet" href="../css/common/common_footer.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-</head>
-<body>
-
-
 <%@include file="../common_header.jsp" %>
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/member/member_login.css">
+
+
+
+
+<script type="text/javascript">
+//	function goPassword(){
+//		mem.t_password.focus();
+//	}
+
+
+	function memberLogin(){
+		if(checkEmpty(mem.t_id,"ID 입력!")) return;
+		if(checkEmpty(mem.t_password,"비밀번호 입력!")) return;
+		mem.t_gubun.value ="memberLogin";
+		mem.method="post";
+		mem.action="Member";
+		mem.submit();
+	}
+</script>
 
 
 <div class="login_wrap">
@@ -25,15 +29,15 @@
     <div class="login_box">
 
         <div class="logo_1">
-            <a href="../index.html">PeraPera</a>
+            <a href="Index">PeraPera</a>
         </div>
 
         <div class="sub_title">
             일본어 학습을 시작해보세요.
         </div>
 
-        <form>
-
+        <form name="mem">
+		<input type="hidden" name="t_gubun">
             <div class="input_box">
                 <input type="text" name="t_id" placeholder="아이디" required>
             </div>
@@ -42,13 +46,13 @@
                 <input type="password" name="t_password" placeholder="비밀번호" required>
             </div>
 
-            <button type="submit" class="login_btn">
+            <button type="button" onclick="memberLogin()" class="login_btn">
                 로그인
             </button>
 
         </form>
         <div class="join_area">
-            <a href="member_join.jsp" class="join_btn">
+            <a href="javascript:goPage('join')" class="join_btn">
                 회원가입
             </a>
         </div>

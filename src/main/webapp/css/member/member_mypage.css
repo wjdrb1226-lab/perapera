@@ -1,0 +1,903 @@
+@charset "UTF-8";
+
+
+/* ==================== RESET ==================== */
+
+*{
+    margin:0;
+    padding:0;
+    text-decoration:none;
+}
+
+
+html{
+    scroll-behavior:smooth;
+}
+
+
+body{
+
+    background:#f3f7fc;
+
+    color:#333;
+
+    font-family:"Do Hyeon", sans-serif;
+
+    font-weight:400;
+
+    font-style:normal;
+
+    overflow-x:auto;
+
+}
+
+
+ul{
+    list-style:none;
+}
+
+
+.wrap{
+    min-width:1900px;
+}
+
+
+/* ==================== HEADER ==================== */
+
+header{
+
+    width:1710px;
+
+    height:90px;
+
+    box-sizing:border-box;
+
+    margin:40px auto 30px auto;
+
+    padding:0 35px;
+
+    background:#fff;
+
+    border-radius:20px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+
+.logo{
+
+    float:left;
+
+    line-height:90px;
+
+    white-space:nowrap;
+
+    font-size:30px;
+
+    color:#3b82f6;
+
+}
+
+
+.logo a{
+
+    color:#3b82f6;
+
+}
+
+
+.headerMenu{
+
+    float:left;
+
+}
+
+
+.headerList{
+
+    float:left;
+
+    line-height:90px;
+
+    margin-left:80px;
+
+    white-space:nowrap;
+
+}
+
+
+.headerList li{
+
+    display:inline-block;
+
+    font-size:25px;
+
+}
+
+
+.headerList li a{
+
+    display:block;
+
+    padding:0 50px;
+
+    color:#000;
+
+    border-radius:10px;
+
+    transition:.3s;
+
+}
+
+
+.headerList li a:hover{
+
+    background:#3b82f6;
+
+    color:#fff;
+
+}
+
+
+.headerJoin{
+
+    float:right;
+
+    line-height:90px;
+
+    font-size:20px;
+
+    white-space:nowrap;
+
+}
+
+
+.headerJoin a{
+
+    color:#000;
+
+    margin-left:10px;
+
+}
+
+
+.headerJoin a:hover{
+
+    color:#3b82f6;
+
+}
+
+
+header::after{
+
+    content:"";
+
+    display:block;
+
+    clear:both;
+
+}
+
+
+
+/* ==================== MAIN ==================== */
+
+main{
+
+    width:1710px;
+
+    margin:0 auto;
+
+}
+
+
+main::after{
+
+    content:"";
+
+    display:block;
+
+    clear:both;
+
+}
+
+
+
+/* ==================== PAGE HEAD ==================== */
+
+.page_head{
+
+    width:100%;
+
+    box-sizing:border-box;
+
+    padding:25px 30px 20px 30px;
+
+}
+
+
+.page_head h1{
+
+    font-size:45px;
+
+    color:#3b82f6;
+
+}
+
+
+.page_head p{
+
+    margin-top:10px;
+
+    font-size:22px;
+
+    color:#777;
+
+}
+
+
+
+/* ==================== SECTION TITLE ==================== */
+
+.section_title{
+
+    font-size:30px;
+
+    color:#3b82f6;
+
+    font-weight:bold;
+
+    margin-bottom:25px;
+
+}
+
+
+.section_title i{
+
+    margin-right:10px;
+
+}
+
+
+
+/* ==================== 회원 정보 ==================== */
+
+.member_info{
+
+    width:100%;
+
+    box-sizing:border-box;
+
+    padding:30px;
+
+    margin-bottom:20px;
+
+    background:#fff;
+
+    border:2px solid #dbeafe;
+
+    border-radius:10px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+
+.member_profile{
+
+    width:100%;
+
+    height:110px;
+
+    padding:15px;
+
+    box-sizing:border-box;
+
+    background:#f8fbff;
+
+    border:2px solid #dbeafe;
+
+    border-radius:15px;
+
+}
+
+
+.profile_icon{
+
+    float:left;
+
+    width:80px;
+
+    height:80px;
+
+    line-height:80px;
+
+    text-align:center;
+
+    background:#dbeafe;
+
+    color:#3b82f6;
+
+    border-radius:50%;
+
+    font-size:40px;
+
+}
+
+
+.profile_text{
+
+    float:left;
+
+    margin-left:20px;
+
+    margin-top:5px;
+
+}
+
+
+.member_name{
+
+    font-size:32px;
+
+}
+
+
+.member_id{
+
+    margin-top:8px;
+
+    font-size:20px;
+
+    color:#777;
+
+}
+
+
+.profile_button{
+
+    float:right;
+
+    margin-top:25px;
+
+    margin-right:15px;
+
+}
+
+
+.profile_button a{
+
+    display:block;
+
+    padding:12px 25px;
+
+    background:#3b82f6;
+
+    color:#fff;
+
+    border-radius:10px;
+
+    font-size:19px;
+
+    transition:.3s;
+
+}
+
+
+.profile_button a:hover{
+
+    background:#2563eb;
+
+}
+
+
+
+/* ==================== 회원 정보 TABLE ==================== */
+
+.member_table{
+
+    width:100%;
+
+    margin-top:20px;
+
+    border-collapse:collapse;
+
+    font-size:20px;
+
+}
+
+
+.member_table th{
+
+    width:15%;
+
+    padding:17px;
+
+    background:#f3f7fc;
+
+    border:1px solid #dbeafe;
+
+    color:#555;
+
+}
+
+
+.member_table td{
+
+    width:35%;
+
+    padding:17px;
+
+    border:1px solid #dbeafe;
+
+    color:#333;
+
+}
+
+
+
+/* ==================== 학습 현황 ==================== */
+
+.study_status{
+
+    width:100%;
+
+    box-sizing:border-box;
+
+    padding:30px;
+
+    margin-bottom:20px;
+
+    background:#fff;
+
+    border:2px solid #dbeafe;
+
+    border-radius:10px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+
+.status_list{
+
+    white-space:nowrap;
+
+    padding:20px;
+
+    overflow-x:auto;
+
+    cursor:grab;
+
+    user-select:none;
+
+}
+
+
+.status_list:active{
+
+    cursor:grabbing;
+
+}
+
+
+/* 스크롤바 */
+
+.status_list::-webkit-scrollbar{
+
+    height:10px;
+
+}
+
+
+.status_list::-webkit-scrollbar-track{
+
+    background:#f1f5f9;
+
+    border-radius:10px;
+
+}
+
+
+.status_list::-webkit-scrollbar-thumb{
+
+    background:#cbd5e1;
+
+    border-radius:10px;
+
+}
+
+
+.status_list::-webkit-scrollbar-thumb:hover{
+
+    background:#94a3b8;
+
+}
+
+
+
+/* ==================== STATUS CARD ==================== */
+
+.status_box{
+
+    display:inline-block;
+
+    vertical-align:top;
+
+    box-sizing:border-box;
+
+    width:300px;
+
+    height:230px;
+
+    padding:25px;
+
+    margin-right:20px;
+
+    text-align:center;
+
+    border-radius:15px;
+
+    transition:all .3s ease;
+
+}
+
+
+.status_box:hover{
+
+    transform:translateY(-8px) scale(1.03);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+
+}
+
+
+.status_blue{
+
+    color:#2563EB;
+
+    background:#dbeafe;
+
+}
+
+
+.status_green{
+
+    color:#16A34A;
+
+    background:#DCFCE7;
+
+}
+
+
+.status_orange{
+
+    color:#D97706;
+
+    background:#FEF3C7;
+
+}
+
+
+.status_purple{
+
+    color:#9333EA;
+
+    background:#F3E8FF;
+
+}
+
+
+.status_pink{
+
+    color:#DB2777;
+
+    background:#FCE7F3;
+
+}
+
+
+.status_title{
+
+    font-size:30px;
+
+    margin-top:5px;
+
+}
+
+
+.status_number{
+
+    margin-top:20px;
+
+    font-size:60px;
+
+}
+
+
+.status_number span{
+
+    margin-left:5px;
+
+    font-size:25px;
+
+}
+
+
+.status_text{
+
+    margin-top:10px;
+
+    font-size:20px;
+
+}
+
+
+
+/* ==================== 내 단어장 ==================== */
+
+.my_wordbook{
+
+    width:100%;
+
+    box-sizing:border-box;
+
+    padding:30px;
+
+    margin-bottom:20px;
+
+    background:#fff;
+
+    border:2px solid #dbeafe;
+
+    border-radius:10px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+
+.wordbook_list{
+
+    margin-top:10px;
+
+}
+
+
+.wordbook_box{
+
+    width:100%;
+
+    min-height:90px;
+
+    box-sizing:border-box;
+
+    padding:18px 25px;
+
+    margin-bottom:12px;
+
+    background:#f8fbff;
+
+    border:2px solid #dbeafe;
+
+    border-radius:12px;
+
+    transition:.3s;
+
+}
+
+
+.wordbook_box:hover{
+
+    transform:translateX(5px);
+
+    background:#f3f8ff;
+
+}
+
+
+.wordbook_info{
+
+    display:inline-block;
+
+}
+
+
+.wordbook_title{
+
+    font-size:28px;
+
+    color:#333;
+
+}
+
+
+.wordbook_desc{
+
+    margin-top:5px;
+
+    font-size:18px;
+
+    color:#777;
+
+}
+
+
+.wordbook_count{
+
+    float:right;
+
+    line-height:55px;
+
+    font-size:20px;
+
+    color:#777;
+
+}
+
+
+.wordbook_count span{
+
+    color:#3b82f6;
+
+    font-size:30px;
+
+}
+
+
+.wordbook_more{
+
+    margin-top:20px;
+
+    text-align:right;
+
+}
+
+
+.wordbook_more a{
+
+    color:#3b82f6;
+
+    font-size:20px;
+
+}
+
+
+.wordbook_more a:hover{
+
+    color:#2563eb;
+
+}
+
+
+.wordbook_more i{
+
+    margin-left:8px;
+
+}
+
+
+
+/* ==================== FOOTER ==================== */
+
+.footer{
+
+    width:1710px;
+
+    margin:20px auto 0 auto;
+
+    clear:both;
+
+}
+
+
+.notice{
+
+    width:1710px;
+
+    height:80px;
+
+    box-sizing:border-box;
+
+    border:2px solid #dbeafe;
+
+    margin-bottom:20px;
+
+    background:#fff;
+
+    border-radius:20px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+
+.fa-bullhorn{
+
+    display:inline-block;
+
+    margin:24px;
+
+    font-size:30px;
+
+    color:#6b7280;
+
+}
+
+
+.notice_title{
+
+    display:inline-block;
+
+    margin-right:24px;
+
+    font-size:28px;
+
+}
+
+
+.notice_content{
+
+    display:inline-block;
+
+    font-size:20px;
+
+    color:#333;
+
+    cursor:pointer;
+
+}
+
+
+.notice_date{
+
+    float:right;
+
+    display:inline-block;
+
+    margin:28px;
+
+    font-size:18px;
+
+    color:#777;
+
+}
+
+
+.fa-angle-right{
+
+    margin-left:20px;
+
+    cursor:pointer;
+
+}
+
+
+.copyright{
+
+    margin:30px 0;
+
+    text-align:center;
+
+    color:#777;
+
+    font-size:17px;
+
+}
+
+
+.footer_logo{
+
+    color:#3b82f6;
+
+    margin-bottom:5px;
+
+}
+
+
+.footer_logo i{
+
+    margin-right:5px;
+
+}
