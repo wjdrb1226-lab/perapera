@@ -1,0 +1,220 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<html>
+<head>
+<link href="sub_c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<title>
+임정규_화면구현평가
+</title>
+</head>
+<body>
+
+<script>
+	function checkEmpty(obj,msg){
+		if(obj.value == ""){
+			alert(msg);
+			obj.focus();
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	function goSave(){
+		if(checkEmpty(mem.t_id,"ID를 입력하세요")) return;
+		if(mem.t_id.value.length >= 11){
+			alert("ID는 10자 이내입니다");
+			return;
+		}
+		
+		if(checkEmpty(mem.t_name,"회원성명을 입력하세요")) return;
+		if(checkEmpty(mem.t_pw,"비밀번호를 입력하세요")) return;
+		
+		
+		if(checkEmpty(mem.t_pw_check,"비밀번호 확인을 입력하세요")) return;
+		
+		if(mem.t_pw.value != mem.t_pw_check.value){
+			alert("비밀번호 확인을 확인하세요");
+			mem.t_pw.value.focus();
+			return;
+		}
+		
+		
+		
+		
+		if(checkEmpty(mem.t_address,"주소를 입력하세요")) return;
+		if(checkEmpty(mem.t_phone_1,"연락처를 입력하세요")) return;
+		if(checkEmpty(mem.t_phone_2,"연락처를 입력하세요")) return;
+		if(checkEmpty(mem.t_phone_3,"연락처를 입력하세요")) return;
+		if(checkEmpty(mem.t_gender,"남여구분을 선택하세요")) return;
+		let hobby = document.getElementsByName("t_hobby");
+		let hobbyCheck = false;
+
+		for(let i = 0; i < hobby.length; i++){
+		    if(hobby[i].checked){
+		        hobbyCheck = true;
+		        break;
+		    }
+		}
+
+		if(!hobbyCheck){
+		    alert("취미는 최소 하나 이상입니다");
+		    return;
+		}
+		
+		alert("회원등록이 정상적으로 등록 되었습니다");
+	}
+	
+	function goReset(){
+	    if(confirm("모든 정보를 지우고 다시 시작합니다")){
+	        document.mem.reset();
+	        document.mem.t_id.focus();
+	    }
+
+	}
+	
+	
+
+</script>
+
+
+
+	<div id="container">
+
+		<div id="b_top_menu">
+			<ul class="top_menu">
+				<li><a href="">Contack</a></li>
+				<li><a href="">LogIn</a></li>
+				<li><a href=""><i class="fa fa-home"></i>Home</a></li>
+			</ul>
+		</div>	
+
+		<div id="b_top">
+			<p class="t_name">TRACKⅡ 27기 임정규 화면구현 평가</p>
+			<ul class="main_menu">
+				<li><a href="">MENU_1</a></li>
+				<li><a href="">MENU_2</a></li>
+				<li><a href="">MENU_3</a></li>
+				<li><a href="">MENU_4</a></li>
+				<li><a href="">MENU_5</a></li>
+				<li><a href="">MENU_6</a></li>
+				<li><a href="">MENU_7</a></li>
+			</ul>		
+		</div>	
+	
+		<div id="b_left">
+			<P>MEMBER</P>
+			<ul>
+				<li><a href="">LOGIN</a></li>
+				<li><a href="">ID / PASSWORD</a></li>
+				<li><a href=""><span class="fnt"><i class="fas fa-apple-alt"></i></span> CONTACK</a></li>
+			</ul>
+		</div>
+		
+		<div id="b_right">
+			<p class="n_title">
+				MEMBER JOIN
+			</p>
+			
+			
+		<form name="mem">	
+			<table class="boardForm">
+			  <colgroup>
+				<col width="200" />
+				<col width="500" />
+			  </colgroup>
+			  <tbody>
+				<tr>
+				  <th>ID</th>
+				  <td>
+				  	<input type="text" name="t_id">
+				  </td>
+				</tr>
+				<tr>
+				  <th>성 명</th>
+				  <td><input type="text" name="t_name" class="name"></td>
+				</tr>
+				<tr>
+				  <th>비밀번호</th>
+				  <td><input type="text" name="t_pw"></td>
+				</tr>
+				<tr>
+				  <th>비밀번호확인</th>
+				  <td><input type="text" name="t_pw_check"></td>
+				</tr>
+				<tr>
+				  <th>지역</th>
+				  <td>
+					<select>
+						<option>서울</option>
+						<option>대전</option>
+						<option>대구</option>
+						<option>부산</option>
+					</select>
+				  </td>
+				</tr>
+				<tr>
+				  <th>주소</th>
+				  <td>
+				  	<input type="text" name="t_address" class="address">
+				  </td>
+				</tr>
+				<tr>
+				  <th>연락처</th>
+				  <td >
+				  	<input type="text" name="t_phone_1" class="phone">-
+				  	<input type="text" name="t_phone_2" class="phone">-
+				  	<input type="text" name="t_phone_3" class="phone">
+				  </td>
+				</tr>
+				<tr>
+				  <th>남여구분</th>
+				  <td>
+				  	<input type="radio" name="t_gender" value="여자">여
+				  	<input type="radio" name="t_gender" value="남자">남
+				  </td>
+				</tr>
+				<tr>
+				  <th>취미</th>
+				  <td>
+				  	<input type="checkbox" name="t_hobby" value="1">여행 
+				  	<input type="checkbox" name="t_hobby" value="2">독서 
+				  	<input type="checkbox" name="t_hobby" value="3">운동
+				  </td>
+				</tr>
+			  </tbody>
+			</table>
+			</form>
+			<div class="buttonGroup_center">
+				<a href="javascript:goSave()" class="butt">회원가입</a>
+				<a href="javascript:goReset()" class="butt">초기화</a>
+			</div>	
+		</div>	
+
+		<div id="b_bottom">
+			<div class="b_bottom_left">
+				<img src="images/footer_logo_4.jpg">
+			</div>
+			<div class="b_bottom_center">
+				<p>개인정보처리방침  | 개인정보보호정책 | 이용약관 | 협회소개</p>
+				JSL인재개발원 대표: 채민경 (대전센터) 대전광역시 중구 계룡로 825 (용두동, 희영빌딩) 5층, 7층/ <br>
+				(서울센터) 서울특별시 송파구 올림픽로 35길 104 ( 장미C상가 403호 )<br>
+				고객센터: 042-242-4412 팩스: 042-242-4413 사업자등록번호: 305-86-06709 통신판매신고번호: 제2019-대전중구-0567호 사업자정보확인 인터넷신문 등록일: 2019.02.19<br>
+				등록번호: 대전 아00325 발행인: 채민경 편집인: 채민경 청소년보호책임자: 김현우<br>
+			</div>
+			<div class="b_bottom_right">
+				서울사무소: (02) 4545- 8545<br>
+				대전사무소: (042) 5417- 8842<br>
+				부산사무소: (048) 4545- 7546
+			</div>		
+		</div>	
+	</div>	
+</body>
+</html>
+
+
+
+
+
+

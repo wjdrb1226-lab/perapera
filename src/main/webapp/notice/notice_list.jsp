@@ -41,8 +41,6 @@
 <form name="view">
 	<input type="hidden" name="t_gubun">
 	<input type="hidden" name="t_no">
-
-
 </form>
 
 

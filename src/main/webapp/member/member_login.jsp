@@ -13,6 +13,24 @@
 //	}
 
 
+	function checkEnter(){
+			var keyValue = event.keyCode;
+			if(keyValue == 13){
+				mem.t_password.focus();
+			}
+			
+			return;
+	  	}
+	  
+	  	function checkEnterPassword(){
+	  		var keyValue = event.keyCode;
+	  		if(keyValue == 13){
+	  			memberLogin();
+	  		}
+	  	}
+
+
+
 	function memberLogin(){
 		if(checkEmpty(mem.t_id,"ID 입력!")) return;
 		if(checkEmpty(mem.t_password,"비밀번호 입력!")) return;
@@ -39,11 +57,11 @@
         <form name="mem">
 		<input type="hidden" name="t_gubun">
             <div class="input_box">
-                <input type="text" name="t_id" placeholder="아이디" required>
+                <input type="text" name="t_id" placeholder="아이디" onkeypress="checkEnter()" required>
             </div>
 
             <div class="input_box">
-                <input type="password" name="t_password" placeholder="비밀번호" required>
+                <input type="password" name="t_password" onkeypress="checkEnterPassword()" placeholder="비밀번호" required>
             </div>
 
             <button type="button" onclick="memberLogin()" class="login_btn">
